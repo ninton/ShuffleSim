@@ -19,10 +19,12 @@ class ShuffleStats {
 
 		// 2. arr2[x軸:$card][y軸:距離]	$card と $card-1 の距離	
 		// 3. arr3[x軸:$card][y軸:距離]	$card と $card-2 の距離
-		// 4. arr4[x軸:$card][y軸:距離]	$card と $card-3 の距離		
-		$this->analyze_dist( -1, $i_cards, $this->arr2 );
-		$this->analyze_dist( -2, $i_cards, $this->arr3 );
-		$this->analyze_dist( -3, $i_cards, $this->arr4 );
+		// 4. arr4[x軸:$card][y軸:距離]	$card と $card-3 の距離
+		$cards2 = $cards = array_flip( $i_cards );
+				
+		$this->analyze_dist( -1, $cards2, $this->arr2 );
+		$this->analyze_dist( -2, $cards2, $this->arr3 );
+		$this->analyze_dist( -3, $cards2, $this->arr4 );
 	}
 	
 	public function analyze_dist( $i_delta_pos, $i_cards, &$io_arr ) {
@@ -39,7 +41,7 @@ class ShuffleStats {
 		//	これを次のように表す	
 		//	カード番号				0	1	2	3
 		//	距離					1	1	1	1
-		
+
 		$card_cnt = $this->xmax;
 		
 		for ( $i = 0; $i < count($i_cards); ++$i ) {
@@ -49,7 +51,7 @@ class ShuffleStats {
 			$pos1 = $i_cards[$i];
 			$dist = $pos1 - $pos0;
 			$dist = ($dist + $card_cnt) % $card_cnt;
-			
+				
 			if ( !isset($io_arr[$i][$dist]) ) {
 				$io_arr[$i][$dist] = 0;
 			}

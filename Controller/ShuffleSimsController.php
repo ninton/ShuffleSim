@@ -87,6 +87,7 @@ class ShuffleSimsController extends ShuffleSimAppController {
 		if ($this->request->is('post')) {
 			$params = array();
 			$params['block_num'] = $this->request->data['ShuffleSim']['block_num'];
+			$params['repeat_num'] = $this->request->data['ShuffleSim']['repeat_num'];
 			
 			$this->simulator = new ShuffleSimulator();
 			$this->simulator->main( 'random_deal', $this->request->data['ShuffleSim']['trial_num'], $params );

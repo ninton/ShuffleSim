@@ -6,6 +6,7 @@
 		echo $this->Form->input('trial_num', array('default' => 1));
 		echo $this->Form->hidden('shuffle_name', array('default' => 'random_deal'));
 		echo $this->Form->input('block_num', array('default' => 10));
+		echo $this->Form->input('repeat_num'   , array('default' => 1));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

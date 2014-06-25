@@ -5,7 +5,7 @@ class ShuffleMethod_hindu extends ShuffleMethod {
 	public $defaults = array(
 		'min_pos' => 4,	
 		'max_pos' => 20,
-		'repeat_num' => 5,	
+		'repeat_num' => 10,	
 	);
 	
 	public function sim() {		
