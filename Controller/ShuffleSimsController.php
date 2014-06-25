@@ -42,7 +42,7 @@ class ShuffleSimsController extends ShuffleSimAppController {
 		$this->set('shuffleSim', $shuffleSim);
 	}
 
-	public function result_img_png($id = null) {
+	public function img_png($id = null) {
 		if (!$this->ShuffleSim->exists($id)) {
 			throw new NotFoundException(__('Invalid sim'));
 		}
@@ -51,60 +51,22 @@ class ShuffleSimsController extends ShuffleSimAppController {
 		$this->set('shuffleSim', $shuffleSim);
 		$this->layout = false;
 		
-		$size = strlen($shuffleSim['ShuffleSim']['result_img_png']);
+		$field = $this->request->params['named']['field'];
+		$bin = $shuffleSim['ShuffleSim'][$field];
+		$size = strlen($bin);
+		$fname = sprintf( '%s_%s_t%s_%s.png',
+			$shuffleSim['ShuffleSim']['shuffle_name'],
+			$shuffleSim['ShuffleSim']['shuffle_params'],
+			$shuffleSim['ShuffleSim']['trial_num'],
+			$field
+		);
+				
 		header( 'Content-type: image/png' );
 		header( "Content-length: $size");
-		echo $shuffleSim['ShuffleSim']['result_img_png'];
+		echo $bin;
 		die();
 	}
 	
-	public function img_png2($id = null) {
-		if (!$this->ShuffleSim->exists($id)) {
-			throw new NotFoundException(__('Invalid sim'));
-		}
-		$options = array('conditions' => array('ShuffleSim.' . $this->ShuffleSim->primaryKey => $id));
-		$shuffleSim = $this->ShuffleSim->find('first', $options);
-		$this->set('shuffleSim', $shuffleSim);
-		$this->layout = false;
-		
-		$size = strlen($shuffleSim['ShuffleSim']['img_png2']);
-		header( 'Content-type: image/png' );
-		header( "Content-length: $size");
-		echo $shuffleSim['ShuffleSim']['img_png2'];
-		die();
-	}
-	
-	public function img_png3($id = null) {
-		if (!$this->ShuffleSim->exists($id)) {
-			throw new NotFoundException(__('Invalid sim'));
-		}
-		$options = array('conditions' => array('ShuffleSim.' . $this->ShuffleSim->primaryKey => $id));
-		$shuffleSim = $this->ShuffleSim->find('first', $options);
-		$this->set('shuffleSim', $shuffleSim);
-		$this->layout = false;
-		
-		$size = strlen($shuffleSim['ShuffleSim']['img_png3']);
-		header( 'Content-type: image/png' );
-		header( "Content-length: $size");
-		echo $shuffleSim['ShuffleSim']['img_png3'];
-		die();
-	}
-	
-	public function img_png4($id = null) {
-		if (!$this->ShuffleSim->exists($id)) {
-			throw new NotFoundException(__('Invalid sim'));
-		}
-		$options = array('conditions' => array('ShuffleSim.' . $this->ShuffleSim->primaryKey => $id));
-		$shuffleSim = $this->ShuffleSim->find('first', $options);
-		$this->set('shuffleSim', $shuffleSim);
-		$this->layout = false;
-		
-		$size = strlen($shuffleSim['ShuffleSim']['img_png4']);
-		header( 'Content-type: image/png' );
-		header( "Content-length: $size");
-		echo $shuffleSim['ShuffleSim']['img_png4'];
-		die();
-	}
 /**
  * add method
  *

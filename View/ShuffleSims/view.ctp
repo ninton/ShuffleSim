@@ -34,17 +34,14 @@ App::uses('ShuffleSim', 'ShuffleSim.Lib');
 			<?php echo nl2br(h($shuffleSim['ShuffleSim']['shuffle_index'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Result Img Png'); ?></dt>
+		<dt><?php echo __('Img Png'); ?></dt>
 		<dd>
-			<?php echo $this->element('result_img_png', array('shuffleSim' => $shuffleSim)); ?>
-			<?php echo $this->element('img_png2', array('shuffleSim' => $shuffleSim)); ?>
-			<?php echo $this->element('img_png3', array('shuffleSim' => $shuffleSim)); ?>
-			<?php echo $this->element('img_png4', array('shuffleSim' => $shuffleSim)); ?>
+			<?php echo $this->element('img_png', array('shuffleSim' => $shuffleSim)); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Result Data'); ?></dt>
 		<dd>
-			<?php echo h($shuffleSim['ShuffleSim']['result_data']); ?>
+			See $shuffleSim['ShuffleSim']['result_data'])
 			&nbsp;
 		</dd>
 		</dl>
