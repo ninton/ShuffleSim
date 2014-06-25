@@ -54,7 +54,8 @@ class ShuffleSimsController extends ShuffleSimAppController {
 		$field = $this->request->params['named']['field'];
 		$bin = $shuffleSim['ShuffleSim'][$field];
 		$size = strlen($bin);
-		$fname = sprintf( '%s_%s_t%s_%s.png',
+		$fname = sprintf( '%d_%s_%s_t%s_%s.png',
+			$id,
 			$shuffleSim['ShuffleSim']['shuffle_name'],
 			$shuffleSim['ShuffleSim']['shuffle_params'],
 			$shuffleSim['ShuffleSim']['trial_num'],
@@ -62,7 +63,8 @@ class ShuffleSimsController extends ShuffleSimAppController {
 		);
 				
 		header( 'Content-type: image/png' );
-		header( "Content-length: $size");
+		header( "Content-length: $size" );
+		header( "Content-Disposition: attachment; filename=$fname" );
 		echo $bin;
 		die();
 	}
@@ -79,11 +81,11 @@ class ShuffleSimsController extends ShuffleSimAppController {
 			$shuffleSim->main( $this->request->data['ShuffleSim']['shuffle_name'], $this->request->data['ShuffleSim']['trial_num'], $params );
 			
 			$this->request->data['ShuffleSim']['shuffle_params'] = sprintf( 'b%d', $this->request->data['ShuffleSim']['block_num'] ); 
-			$this->request->data['ShuffleSim']['result_data'   ] = serialize($shuffleSim->result['data']);
-			$this->request->data['ShuffleSim']['result_img_png'] = $shuffleSim->result['img_png'];
-			$this->request->data['ShuffleSim']['img_png2'      ] = $shuffleSim->result['img_png2'];
-			$this->request->data['ShuffleSim']['img_png3'      ] = $shuffleSim->result['img_png3'];
-			$this->request->data['ShuffleSim']['img_png4'      ] = $shuffleSim->result['img_png4'];
+			$this->request->data['ShuffleSim']['data1'] = serialize($shuffleSim->result['data']);
+			$this->request->data['ShuffleSim']['img1'] = $shuffleSim->result['img_png'];
+			$this->request->data['ShuffleSim']['img2'] = $shuffleSim->result['img_png2'];
+			$this->request->data['ShuffleSim']['img3'] = $shuffleSim->result['img_png3'];
+			$this->request->data['ShuffleSim']['img4'] = $shuffleSim->result['img_png4'];
 			$this->request->data['ShuffleSim']['shuffle_index' ] = $shuffleSim->result['shuffle_index'];
 
 			$this->_add();
@@ -110,11 +112,11 @@ class ShuffleSimsController extends ShuffleSimAppController {
 			$shuffleSim->main( 'random_deal', $this->request->data['ShuffleSim']['trial_num'], $params );
 			
 			$this->request->data['ShuffleSim']['shuffle_params'] = sprintf( 'b%d', $this->request->data['ShuffleSim']['block_num'] ); 
-			$this->request->data['ShuffleSim']['result_data'   ] = serialize($shuffleSim->result['data']);
-			$this->request->data['ShuffleSim']['result_img_png'] = $shuffleSim->result['img_png'];
-			$this->request->data['ShuffleSim']['img_png2'      ] = $shuffleSim->result['img_png2'];
-			$this->request->data['ShuffleSim']['img_png3'      ] = $shuffleSim->result['img_png3'];
-			$this->request->data['ShuffleSim']['img_png4'      ] = $shuffleSim->result['img_png4'];
+			$this->request->data['ShuffleSim']['data1'] = serialize($shuffleSim->result['data']);
+			$this->request->data['ShuffleSim']['img1'] = $shuffleSim->result['img_png'];
+			$this->request->data['ShuffleSim']['img2'] = $shuffleSim->result['img_png2'];
+			$this->request->data['ShuffleSim']['img3'] = $shuffleSim->result['img_png3'];
+			$this->request->data['ShuffleSim']['img4'] = $shuffleSim->result['img_png4'];
 			$this->request->data['ShuffleSim']['shuffle_index' ] = $shuffleSim->result['shuffle_index'];
 				
 			$this->_add();
@@ -132,11 +134,11 @@ class ShuffleSimsController extends ShuffleSimAppController {
 			$shuffleSim->main( 'cut', $this->request->data['ShuffleSim']['trial_num'], $params );
 			
 			$this->request->data['ShuffleSim']['shuffle_params'] = sprintf( 'min%d_max%d_rep%d', $params['min_pos'], $params['max_pos'], $params['repeat_num'] ); 
-			$this->request->data['ShuffleSim']['result_data'   ] = serialize($shuffleSim->result['data']);
-			$this->request->data['ShuffleSim']['result_img_png'] = $shuffleSim->result['img_png'];
-			$this->request->data['ShuffleSim']['img_png2'      ] = $shuffleSim->result['img_png2'];
-			$this->request->data['ShuffleSim']['img_png3'      ] = $shuffleSim->result['img_png3'];
-			$this->request->data['ShuffleSim']['img_png4'      ] = $shuffleSim->result['img_png4'];
+			$this->request->data['ShuffleSim']['data1'] = serialize($shuffleSim->result['data']);
+			$this->request->data['ShuffleSim']['img1'] = $shuffleSim->result['img_png'];
+			$this->request->data['ShuffleSim']['img2'] = $shuffleSim->result['img_png2'];
+			$this->request->data['ShuffleSim']['img3'] = $shuffleSim->result['img_png3'];
+			$this->request->data['ShuffleSim']['img4'] = $shuffleSim->result['img_png4'];
 			$this->request->data['ShuffleSim']['shuffle_index' ] = $shuffleSim->result['shuffle_index'];
 				
 			$this->_add();
@@ -154,11 +156,11 @@ class ShuffleSimsController extends ShuffleSimAppController {
 			$shuffleSim->main( 'hindu', $this->request->data['ShuffleSim']['trial_num'], $params );
 			
 			$this->request->data['ShuffleSim']['shuffle_params'] = sprintf( 'min%d_max%d_rep%d', $params['min_pos'], $params['max_pos'], $params['repeat_num'] ); 
-			$this->request->data['ShuffleSim']['result_data'   ] = serialize($shuffleSim->result['data']);
-			$this->request->data['ShuffleSim']['result_img_png'] = $shuffleSim->result['img_png'];
-			$this->request->data['ShuffleSim']['img_png2'      ] = $shuffleSim->result['img_png2'];
-			$this->request->data['ShuffleSim']['img_png3'      ] = $shuffleSim->result['img_png3'];
-			$this->request->data['ShuffleSim']['img_png4'      ] = $shuffleSim->result['img_png4'];
+			$this->request->data['ShuffleSim']['data1'] = serialize($shuffleSim->result['data']);
+			$this->request->data['ShuffleSim']['img1'] = $shuffleSim->result['img_png'];
+			$this->request->data['ShuffleSim']['img2'] = $shuffleSim->result['img_png2'];
+			$this->request->data['ShuffleSim']['img3'] = $shuffleSim->result['img_png3'];
+			$this->request->data['ShuffleSim']['img4'] = $shuffleSim->result['img_png4'];
 			$this->request->data['ShuffleSim']['shuffle_index' ] = $shuffleSim->result['shuffle_index'];
 				
 			$this->_add();
