@@ -23,7 +23,7 @@ class SimTest extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->Sim = ClassRegistry::init('ShuffleSim.Sim');
+		$this->ShuffleSim = ClassRegistry::init('ShuffleSim.Sim');
 	}
 
 /**
@@ -32,7 +32,7 @@ class SimTest extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->Sim);
+		unset($this->ShuffleSim);
 
 		parent::tearDown();
 	}

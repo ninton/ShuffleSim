@@ -4,7 +4,7 @@ App::uses('ShuffleSimAppModel', 'ShuffleSim.Model');
  * Sim Model
  *
  */
-class Sim extends ShuffleSimAppModel {
+class ShuffleSim extends ShuffleSimAppModel {
 	/**
 	 * Display field
 	 *

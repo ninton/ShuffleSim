@@ -1,11 +1,11 @@
 <?php
-App::uses('SimsController', 'ShuffleSim.Controller');
+App::uses('shuffleSimsController', 'ShuffleSim.Controller');
 
 /**
- * SimsController Test Case
+ * shuffleSimsController Test Case
  *
  */
-class SimsControllerTest extends ControllerTestCase {
+class shuffleSimsControllerTest extends ControllerTestCase {
 
 /**
  * Fixtures

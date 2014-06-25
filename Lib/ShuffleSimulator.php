@@ -2,7 +2,7 @@
 App::uses('ShuffleStats', 'ShuffleSim.Lib');
 App::uses('Random'      , 'ShuffleSim.Lib');
 
-class ShuffleSim {
+class ShuffleSimulator {
 	public $INITAIL_CARDS = [];
 	public $cards = [];
 	public $trial_num = 100;
@@ -25,15 +25,15 @@ class ShuffleSim {
 		
 		$className = "ShuffleMethod_" . $i_shuffle_name;
 		App::uses( $className, 'ShuffleSim.Lib' );
-		$sim = new $className( $i_params );
+		$shuffleSim = new $className( $i_params );
 		
 		$this->trial_num = $i_trial_num;
 		$this->stats->init($this->trial_num);
 		
 		for ( $i = 0; $i < $this->trial_num; ++$i ) {
-			$sim->cards = $this->INITAIL_CARDS;
-			$sim->sim();
-			$this->stats->analyze( $sim->cards );
+			$shuffleSim->cards = $this->INITAIL_CARDS;
+			$shuffleSim->sim();
+			$this->stats->analyze( $shuffleSim->cards );
 		}
 		
 		$this->result['data'   ] = $this->stats->sum_arr;

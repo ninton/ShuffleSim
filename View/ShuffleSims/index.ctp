@@ -14,21 +14,21 @@
 			<th><?php echo $this->Paginator->sort('img_png4'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
-	<?php foreach ($sims as $sim): ?>
+	<?php foreach ($shuffleSims as $shuffleSim): ?>
 	<tr>
-		<td><?php echo h($sim['Sim']['id']); ?>&nbsp;</td>
-		<td><?php echo h($sim['Sim']['created']); ?>&nbsp;</td>
-		<td><?php echo h($sim['Sim']['trial_num']); ?>&nbsp;</td>
-		<td><?php echo h($sim['Sim']['shuffle_name']); ?>&nbsp;</td>
-		<td><?php echo h($sim['Sim']['shuffle_params']); ?>&nbsp;</td>
-		<td><?php echo nl2br(h($sim['Sim']['shuffle_index'])); ?>&nbsp;</td>
-		<td><?php echo $this->element('result_img_png', array('sim' => $sim)); ?></td>
-		<td><?php echo $this->element('img_png2', array('sim' => $sim)); ?></td>
-		<td><?php echo $this->element('img_png3', array('sim' => $sim)); ?></td>
-		<td><?php echo $this->element('img_png4', array('sim' => $sim)); ?></td>
+		<td><?php echo h($shuffleSim['ShuffleSim']['id']); ?>&nbsp;</td>
+		<td><?php echo h($shuffleSim['ShuffleSim']['created']); ?>&nbsp;</td>
+		<td><?php echo h($shuffleSim['ShuffleSim']['trial_num']); ?>&nbsp;</td>
+		<td><?php echo h($shuffleSim['ShuffleSim']['shuffle_name']); ?>&nbsp;</td>
+		<td><?php echo h($shuffleSim['ShuffleSim']['shuffle_params']); ?>&nbsp;</td>
+		<td><?php echo nl2br(h($shuffleSim['ShuffleSim']['shuffle_index'])); ?>&nbsp;</td>
+		<td><?php echo $this->element('result_img_png', array('shuffleSim' => $shuffleSim)); ?></td>
+		<td><?php echo $this->element('img_png2', array('shuffleSim' => $shuffleSim)); ?></td>
+		<td><?php echo $this->element('img_png3', array('shuffleSim' => $shuffleSim)); ?></td>
+		<td><?php echo $this->element('img_png4', array('shuffleSim' => $shuffleSim)); ?></td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $sim['Sim']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $sim['Sim']['id']), null, __('Are you sure you want to delete # %s?', $sim['Sim']['id'])); ?>
+			<?php echo $this->Html->link(__('View'), array('action' => 'view', $shuffleSim['ShuffleSim']['id'])); ?>
+			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $shuffleSim['ShuffleSim']['id']), null, __('Are you sure you want to delete # %s?', $shuffleSim['ShuffleSim']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

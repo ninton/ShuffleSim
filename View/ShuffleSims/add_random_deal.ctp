@@ -1,5 +1,5 @@
 <div class="sims form">
-<?php echo $this->Form->create('Sim'); ?>
+<?php echo $this->Form->create('ShuffleSim'); ?>
 	<fieldset>
 		<legend><?php echo __('Add Random Deal'); ?></legend>
 	<?php

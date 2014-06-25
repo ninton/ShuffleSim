@@ -5,17 +5,17 @@ App::uses('ShuffleMethod_random_deal', 'ShuffleSim.Lib');
 
 class ShuffleMethod_mix_c_rd_c extends ShuffleMethod {
 	public function sim() {
-		$sim1 = new ShuffleMethod_cut();
-		$sim1->cards = $this->cards;
-		$sim1->sim();
+		$shuffleSim1 = new ShuffleMethod_cut();
+		$shuffleSim1->cards = $this->cards;
+		$shuffleSim1->sim();
 
-		$sim2 = new ShuffleMethod_random_deal();
-		$sim2->cards = $sim1->cards;
-		$sim2->sim();
+		$shuffleSim2 = new ShuffleMethod_random_deal();
+		$shuffleSim2->cards = $shuffleSim1->cards;
+		$shuffleSim2->sim();
 
-		$sim1->cards = $sim2->cards;
-		$sim1->sim();
+		$shuffleSim1->cards = $shuffleSim2->cards;
+		$shuffleSim1->sim();
 		
-		$this->cards = $sim1->cards;
+		$this->cards = $shuffleSim1->cards;
 	}
 }
