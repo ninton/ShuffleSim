@@ -88,10 +88,10 @@ class ShuffleSimsController extends ShuffleSimAppController {
 
 	public function _add() {
 		$this->request->data['ShuffleSim']['data1'] = serialize($this->simulator->result['data']);
-		$this->request->data['ShuffleSim']['img1'] = $this->simulator->result['img_png'];
-		$this->request->data['ShuffleSim']['img2'] = $this->simulator->result['img_png2'];
-		$this->request->data['ShuffleSim']['img3'] = $this->simulator->result['img_png3'];
-		$this->request->data['ShuffleSim']['img4'] = $this->simulator->result['img_png4'];
+		$this->request->data['ShuffleSim']['img1'] = $this->simulator->result['img1'];
+		$this->request->data['ShuffleSim']['img2'] = $this->simulator->result['img2'];
+		$this->request->data['ShuffleSim']['img3'] = $this->simulator->result['img3'];
+		$this->request->data['ShuffleSim']['img4'] = $this->simulator->result['img4'];
 		$this->request->data['ShuffleSim']['shuffle_index' ] = $this->simulator->result['shuffle_index'];
 
 		$this->ShuffleSim->create();

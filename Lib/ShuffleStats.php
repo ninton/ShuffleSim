@@ -4,8 +4,7 @@ App::uses('Array2dLib', 'ShuffleSim.Lib');
 
 class ShuffleStats {
 	public $trial_num = 1;
-	public $sum_arr   = array();
-	public $pat_arr   = array();
+	public $arr1   = array();
 	public $arr2      = array();
 	public $arr3      = array();
 	public $arr4      = array();
@@ -15,10 +14,10 @@ class ShuffleStats {
 
 		for ( $card = 0; $card < 52; ++$card ) {
 			for ( $pos = 0; $pos < 52; ++$pos ) {
-				$this->sum_arr[$card][$pos] = 0;
-				$this->arr2   [$card][$pos] = 0;
-				$this->arr3   [$card][$pos] = 0;
-				$this->arr4   [$card][$pos] = 0;
+				$this->arr1[$card][$pos] = 0;
+				$this->arr2[$card][$pos] = 0;
+				$this->arr3[$card][$pos] = 0;
+				$this->arr4[$card][$pos] = 0;
 			}
 		}
 	}
@@ -26,25 +25,12 @@ class ShuffleStats {
 	public function analyze( $i_cards ) {
 		$card_cnt = 52;
 		
-		// 1. sum_arr
+		// 1. arr1
 		foreach ( $i_cards as $pos => $card ) {
-			$this->sum_arr[$card][$pos] ++;
+			$this->arr1[$card][$pos] ++;
 		}
 
-		// 2. pat_arr
-		$arr[] = $i_cards[0];
-		$arr[] = $i_cards[18];
-		$arr[] = $i_cards[26];
-		
-		$pat = join('.', $arr);
-		$pat = sha1($pat);
-		
-		if ( !isset($this->pat_arr[$pat]) ) {
-			$this->pat_arr[$pat] = 0;
-		}
-		$this->pat_arr[$pat]++;
-		
-		// 3. arr2	
+		// 2. arr2	
 		for ( $i = 0; $i < count($i_cards); ++$i ) {
 			$i0 = $i - 1;
 			$i0 = ($i0 + $card_cnt) % $card_cnt;
@@ -59,7 +45,7 @@ class ShuffleStats {
 			$this->arr2[$i][$dist]++;
 		}
 
-		// 4. arr3	
+		// 3. arr3	
 		for ( $i = 0; $i < count($i_cards); ++$i ) {
 			$i0 = $i - 2;
 			$i0 = ($i0 + $card_cnt) % $card_cnt;
@@ -74,7 +60,7 @@ class ShuffleStats {
 			$this->arr3[$i][$dist]++;
 		}
 
-		// 5. arr4	
+		// 4. arr4	
 		for ( $i = 0; $i < count($i_cards); ++$i ) {
 			$i0 = $i - 3;
 			$i0 = ($i0 + $card_cnt) % $card_cnt;
@@ -93,7 +79,7 @@ class ShuffleStats {
 	public function shuffle_index() {
 		$buf = '';
 		
-		$v = Array2dLib::variance( $this->sum_arr );
+		$v = Array2dLib::variance( $this->arr1 );
 		$sd = sqrt($v);
 		$buf .= "sd=" . $sd . "\n";
 		
@@ -117,7 +103,7 @@ class ShuffleStats {
 
 		for ( $card = 0; $card < 52; ++$card ) {
 			for ( $pos = 0; $pos < 52; ++$pos ) {
-				$n = $this->sum_arr[$card][$pos];
+				$n = $this->arr1[$card][$pos];
 				$gray = (int)(255 * $n / $this->trial_num);
 				$gray *= 4;
 				$gray = 255 - $gray;

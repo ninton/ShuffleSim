@@ -36,11 +36,11 @@ class ShuffleSimulator {
 			$this->stats->analyze( $shuffleSim->cards );
 		}
 		
-		$this->result['data'   ] = $this->stats->sum_arr;
-		$this->result['img_png'] = $this->stats->img_png();	
-		$this->result['img_png2'] = $this->stats->img_png2();	
-		$this->result['img_png3'] = $this->stats->img_png3();	
-		$this->result['img_png4'] = $this->stats->img_png4();	
+		$this->result['data'] = $this->stats->arr1;
+		$this->result['img1'] = $this->stats->img_png();	
+		$this->result['img2'] = $this->stats->img_png2();	
+		$this->result['img3'] = $this->stats->img_png3();	
+		$this->result['img4'] = $this->stats->img_png4();	
 		$this->result['shuffle_index'] = $this->stats->shuffle_index();
 	}
 }
