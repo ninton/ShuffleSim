@@ -16,76 +16,10 @@ class ShuffleSimsController extends ShuffleSimAppController {
  */
 
 /**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->ShuffleSim->recursive = 0;
-		$this->set('shuffleSims', $this->Paginator->paginate());
-	}
-
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		if (!$this->ShuffleSim->exists($id)) {
-			throw new NotFoundException(__('Invalid sim'));
-		}
-		$options = array('conditions' => array('ShuffleSim.' . $this->ShuffleSim->primaryKey => $id));
-		$shuffleSim = $this->ShuffleSim->find('first', $options);
-
-		$this->set('shuffleSim', $shuffleSim);
-	}
-
-	public function img_png($id = null) {
-		if (!$this->ShuffleSim->exists($id)) {
-			throw new NotFoundException(__('Invalid sim'));
-		}
-		$options = array('conditions' => array('ShuffleSim.' . $this->ShuffleSim->primaryKey => $id));
-		$shuffleSim = $this->ShuffleSim->find('first', $options);
-		$this->set('shuffleSim', $shuffleSim);
-		$this->layout = false;
-		
-		$field = $this->request->params['named']['field'];
-		$bin = $shuffleSim['ShuffleSim'][$field];
-		$size = strlen($bin);
-		$fname = sprintf( '%d_%s_%s_t%s_%s.png',
-			$id,
-			$shuffleSim['ShuffleSim']['shuffle_name'],
-			$shuffleSim['ShuffleSim']['shuffle_params'],
-			$shuffleSim['ShuffleSim']['trial_num'],
-			$field
-		);
-				
-		header( 'Content-type: image/png' );
-		header( "Content-length: $size" );
-		header( "Content-Disposition: attachment; filename=$fname" );
-		echo $bin;
-		die();
-	}
-	
-/**
  * add method
  *
  * @return void
  */
-	public function add() {
-		if ($this->request->is('post')) {
-			$params = array();
-			$this->simulator = new ShuffleSimulator();
-			$this->simulator->main( $this->request->data['ShuffleSim']['shuffle_name'], $this->request->data['ShuffleSim']['trial_num'], $params );
-			
-			$this->request->data['ShuffleSim']['shuffle_params'] = '';
-			 
-			$this->_add();
-		}
-	}
-
 	public function _add() {
 		$this->request->data['ShuffleSim']['data1'] = serialize($this->simulator->result['data']);
 		$this->request->data['ShuffleSim']['img1'] = $this->simulator->result['img1'];
@@ -104,16 +38,14 @@ class ShuffleSimsController extends ShuffleSimAppController {
 		}
 	}
 	
-	public function add_random_deal() {
+	public function add() {
 		if ($this->request->is('post')) {
 			$params = array();
-			$params['block_num'] = $this->request->data['ShuffleSim']['block_num'];
-			
 			$this->simulator = new ShuffleSimulator();
-			$this->simulator->main( 'random_deal', $this->request->data['ShuffleSim']['trial_num'], $params );
+			$this->simulator->main( $this->request->data['ShuffleSim']['shuffle_name'], $this->request->data['ShuffleSim']['trial_num'], $params );
 			
-			$this->request->data['ShuffleSim']['shuffle_params'] = sprintf( 'b%d', $this->request->data['ShuffleSim']['block_num'] ); 
-				
+			$this->request->data['ShuffleSim']['shuffle_params'] = '';
+			 
 			$this->_add();
 		}
 	}
@@ -150,6 +82,20 @@ class ShuffleSimsController extends ShuffleSimAppController {
 		}
 	}
 
+	public function add_random_deal() {
+		if ($this->request->is('post')) {
+			$params = array();
+			$params['block_num'] = $this->request->data['ShuffleSim']['block_num'];
+			
+			$this->simulator = new ShuffleSimulator();
+			$this->simulator->main( 'random_deal', $this->request->data['ShuffleSim']['trial_num'], $params );
+			
+			$this->request->data['ShuffleSim']['shuffle_params'] = sprintf( 'b%d', $this->request->data['ShuffleSim']['block_num'] ); 
+				
+			$this->_add();
+		}
+	}
+
 /**
  * delete method
  *
@@ -169,5 +115,61 @@ class ShuffleSimsController extends ShuffleSimAppController {
 			$this->Session->setFlash(__('The sim could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+
+	public function img_png($id = null) {
+		if (!$this->ShuffleSim->exists($id)) {
+			throw new NotFoundException(__('Invalid sim'));
+		}
+		$options = array('conditions' => array('ShuffleSim.' . $this->ShuffleSim->primaryKey => $id));
+		$shuffleSim = $this->ShuffleSim->find('first', $options);
+		$this->set('shuffleSim', $shuffleSim);
+		$this->layout = false;
+		
+		$field = $this->request->params['named']['field'];
+		$bin = $shuffleSim['ShuffleSim'][$field];
+		$size = strlen($bin);
+		$fname = sprintf( '%d_%s_%s_t%s_%s.png',
+			$id,
+			$shuffleSim['ShuffleSim']['shuffle_name'],
+			$shuffleSim['ShuffleSim']['shuffle_params'],
+			$shuffleSim['ShuffleSim']['trial_num'],
+			$field
+		);
+				
+		header( 'Content-type: image/png' );
+		header( "Content-length: $size" );
+		header( "Content-Disposition: attachment; filename=$fname" );
+		echo $bin;
+		die();
+	}
+	
+/**
+ * index method
+ *
+ * @return void
+ */
+	public function index() {
+		$this->ShuffleSim->recursive = 0;
+		$this->set('shuffleSims', $this->Paginator->paginate());
+	}
+
+/**
+ * view method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function view($id = null) {
+		if (!$this->ShuffleSim->exists($id)) {
+			throw new NotFoundException(__('Invalid sim'));
+		}
+		$options = array('conditions' => array('ShuffleSim.' . $this->ShuffleSim->primaryKey => $id));
+		$shuffleSim = $this->ShuffleSim->find('first', $options);
+
+		$this->set('shuffleSim', $shuffleSim);
+	}
+
+}
 	

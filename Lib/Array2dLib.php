@@ -1,37 +1,5 @@
 <?php
 class Array2dLib {
-	static function sum( $i_arr ) {
-		$ymax = count($i_arr);
-		$xmax = count($i_arr[0]);
-	
-		$sum = 0.0;
-		for ( $y = 0; $y < $ymax; ++$y ) {
-			$sum += array_sum( $i_arr[$y] );
-		}
-	
-		return $sum;
-	}
-	
-	static function variance( $i_arr ) {
-		$ymax = count($i_arr);
-		$xmax = count($i_arr[0]);
-		$m = $ymax * $xmax * 1.0;
-		$sum = self::sum( $i_arr );
-		$mean = $sum / $m;
-	
-		$vsum = 0.0;
-		for ( $y = 0; $y < $ymax; ++$y ) {
-			for ( $x = 0; $x < $xmax; ++$x ) {
-				$d = $i_arr[$y][$x] - $mean;
-				$vsum += ($d * $d);
-	
-			}
-		}
-		$v = $vsum / $m;
-	
-		return $v;
-	}
-	
 	static function edge( $i_src_arr, &$o_edge_arr ) {
 		$ymax = count($i_src_arr);
 		$xmax = count($i_src_arr[0]);
@@ -66,6 +34,39 @@ class Array2dLib {
 			}
 		}
 	}
+
+	static function sum( $i_arr ) {
+		$ymax = count($i_arr);
+		$xmax = count($i_arr[0]);
+	
+		$sum = 0.0;
+		for ( $y = 0; $y < $ymax; ++$y ) {
+			$sum += array_sum( $i_arr[$y] );
+		}
+	
+		return $sum;
+	}
+	
+	static function variance( $i_arr ) {
+		$ymax = count($i_arr);
+		$xmax = count($i_arr[0]);
+		$m = $ymax * $xmax * 1.0;
+		$sum = self::sum( $i_arr );
+		$mean = $sum / $m;
+	
+		$vsum = 0.0;
+		for ( $y = 0; $y < $ymax; ++$y ) {
+			for ( $x = 0; $x < $xmax; ++$x ) {
+				$d = $i_arr[$y][$x] - $mean;
+				$vsum += ($d * $d);
+	
+			}
+		}
+		$v = $vsum / $m;
+	
+		return $v;
+	}
+	
 }
 
 ?>
