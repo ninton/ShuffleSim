@@ -35,6 +35,12 @@ class Array2dLib {
 		}
 	}
 
+	static function sd( $i_arr ) {
+		$v = self::variance($i_arr);
+		$sd = sqrt($v);
+		return $sd;	
+	}
+	
 	static function sum( $i_arr ) {
 		$ymax = count($i_arr);
 		$xmax = count($i_arr[0]);
@@ -48,8 +54,8 @@ class Array2dLib {
 	}
 	
 	static function variance( $i_arr ) {
-		$ymax = count($i_arr);
-		$xmax = count($i_arr[0]);
+		$xmax = count($i_arr);
+		$ymax = count($i_arr[0]);
 		$m = $ymax * $xmax * 1.0;
 		$sum = self::sum( $i_arr );
 		$mean = $sum / $m;

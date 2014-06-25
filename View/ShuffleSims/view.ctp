@@ -41,7 +41,7 @@ App::uses('ShuffleSim', 'ShuffleSim.Lib');
 		</dd>
 		<dt><?php echo __('Result Data'); ?></dt>
 		<dd>
-			See $shuffleSim['ShuffleSim']['result_data'])
+			See $shuffleSim['ShuffleSim']['data'])
 			&nbsp;
 		</dd>
 		</dl>
