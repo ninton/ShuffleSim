@@ -3,25 +3,12 @@ App::uses('ArrayLib'  , 'ShuffleSim.Lib');
 App::uses('Array2dLib', 'ShuffleSim.Lib');
 
 class ShuffleStats {
+	public $arr1 = array();
+	public $arr2 = array();
+	public $arr3 = array();
+	public $arr4 = array();
 	public $trial_num = 1;
-	public $arr1   = array();
-	public $arr2      = array();
-	public $arr3      = array();
-	public $arr4      = array();
 	
-	public function init( $i_trial_num ) {
-		$this->trial_num = $i_trial_num;
-
-		for ( $card = 0; $card < 52; ++$card ) {
-			for ( $pos = 0; $pos < 52; ++$pos ) {
-				$this->arr1[$card][$pos] = 0;
-				$this->arr2[$card][$pos] = 0;
-				$this->arr3[$card][$pos] = 0;
-				$this->arr4[$card][$pos] = 0;
-			}
-		}
-	}
-
 	public function analyze( $i_cards ) {
 		$card_cnt = 52;
 		
@@ -76,28 +63,6 @@ class ShuffleStats {
 		}
 	}
 
-	public function shuffle_index() {
-		$buf = '';
-		
-		$v = Array2dLib::variance( $this->arr1 );
-		$sd = sqrt($v);
-		$buf .= "sd=" . $sd . "\n";
-		
-		$v = Array2dLib::variance( $this->arr2 );
-		$sd = sqrt($v);
-		$buf .= "i,i-1 sd=" . $sd . "\n";
-		
-		$v = Array2dLib::variance( $this->arr3 );
-		$sd = sqrt($v);
-		$buf .= "i,i-2 sd=" . $sd . "\n";
-		
-		$v = Array2dLib::variance( $this->arr4 );
-		$sd = sqrt($v);
-		$buf .= "i,i-3 sd=" . $sd . "\n";
-		
-		return $buf;
-	}
-	
 	public function img_png() {
 		$im = imagecreatetruecolor( 52, 52 );
 
@@ -209,6 +174,42 @@ class ShuffleStats {
 
 		return $png;
 	}
+
+	public function init( $i_trial_num ) {
+		$this->trial_num = $i_trial_num;
+
+		for ( $card = 0; $card < 52; ++$card ) {
+			for ( $pos = 0; $pos < 52; ++$pos ) {
+				$this->arr1[$card][$pos] = 0;
+				$this->arr2[$card][$pos] = 0;
+				$this->arr3[$card][$pos] = 0;
+				$this->arr4[$card][$pos] = 0;
+			}
+		}
+	}
+
+	public function shuffle_index() {
+		$buf = '';
+		
+		$v = Array2dLib::variance( $this->arr1 );
+		$sd = sqrt($v);
+		$buf .= "sd=" . $sd . "\n";
+		
+		$v = Array2dLib::variance( $this->arr2 );
+		$sd = sqrt($v);
+		$buf .= "i,i-1 sd=" . $sd . "\n";
+		
+		$v = Array2dLib::variance( $this->arr3 );
+		$sd = sqrt($v);
+		$buf .= "i,i-2 sd=" . $sd . "\n";
+		
+		$v = Array2dLib::variance( $this->arr4 );
+		$sd = sqrt($v);
+		$buf .= "i,i-3 sd=" . $sd . "\n";
+		
+		return $buf;
+	}
+	
 }
 
 ?>
