@@ -8,7 +8,7 @@ Requirements
 cakePHP
 
 Simulation Report
-  If the Diehl shuffle is distributed to random order 
+  If the Pile shuffle is distributed to random order 
   ディールシャッフルをランダム順に配ってみると
   http://www.ninton.co.jp/?p=1400
 
