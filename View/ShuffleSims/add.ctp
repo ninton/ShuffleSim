@@ -6,7 +6,7 @@ $options = array(
 	'random_deal' => 'random_deal',
 	'mix_c_rd'    => 'cut + random_deal', 
 	'mix_c_rd_c'  => 'cut + random_deal + cut', 
-	'mix_c_hindu_c'  => 'cut + hindu(8,12,5) + cut', 
+	'mix_c_hindu_c'  => 'cut + hindu + cut', 
 );
 $params = array(
 	'type' => 'select',
