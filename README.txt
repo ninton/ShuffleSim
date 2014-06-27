@@ -20,6 +20,6 @@ Setup Seaquence
 
 3. import ShffleSim/Config/Schema/shuffle_sims.sql
 
-4. access http://localhost/shuffle_sum/shuffle_sims/
+4. access http://localhost/shuffle_sim/shuffle_sims/
 
 
