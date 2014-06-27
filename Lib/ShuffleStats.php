@@ -10,6 +10,19 @@ class ShuffleStats {
 	public $trial_num = 1;
 	public $xmax = 52;
 	public $ymax = 52;
+
+	public function adjoined_rate( $i_arr2d ) {
+		$sum = array();
+		for ( $y = 0; $y < $this->ymax; ++$y ) {
+			$sum[$y] = 0;
+			for ( $x = 0; $x < $this->xmax; ++$x ) {
+				$sum[$y] += $i_arr2d[$x][$y];
+			}
+		}
+		$rate = 1.0 * ($sum[1] + $sum[51]) / $this->xmax / $this->trial_num;
+		
+		return $rate;
+	}
 	
 	public function analyze( $i_cards ) {
 		// 1. arr1[x軸:$card][y軸:$pos]
@@ -102,6 +115,9 @@ class ShuffleStats {
 		
 		$sd4 = Array2dLib::sd( $this->arr4 );
 		$arr[] = sprintf('arr4 sd=%.4f', $sd4);
+
+		$adjoined_rate = $this->adjoined_rate( $this->arr2 );
+		$arr[] = sprintf('adjoined rate=%.4f', $adjoined_rate);
 		
 		$buf = join("\n", $arr);
 		return $buf;
